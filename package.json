@@ -1,0 +1,74 @@
+{
+  "name": "philipstv-jointspace-client",
+  "version": "0.0.1",
+  "description": "TBD",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
+  "repository": "https://github.com/dhayab/philipstv-jointspace-client",
+  "author": "Dhaya Benmessaoud <dhaya.benmessaoud@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "info": "npm-scripts-info",
+    "build": "trash build && yarn build:main",
+    "build:main": "tsc -p tsconfig.json",
+    "build:tests": "trash test && node config/exports/build-tests.js",
+    "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
+    "unit": "yarn build && yarn build:tests && nyc ava",
+    "check-coverage": "nyc check-coverage --lines 100 --functions 100 --branches 100",
+    "test": "yarn lint && yarn unit && yarn check-coverage",
+    "watch": "yarn build && yarn build:tests -- --no-browser && concurrently -r --kill-others 'npm run --silent build:main -- -w' 'npm run --silent build:tests -- -w --no-browser' 'sleepms 2000 && ava --watch'",
+    "cov": "yarn unit && yarn html-coverage && opn coverage/index.html",
+    "html-coverage": "nyc report --reporter=html",
+    "docs": "yarn docs:html && opn build/docs/index.html",
+    "docs:html": "typedoc src/index.ts --excludePrivate --mode file --theme minimal --out build/docs",
+    "docs:json": "typedoc --mode file --json build/docs/typedoc.json src/index.ts",
+    "changelog": "standard-version",
+    "release": "yarn reset && yarn test && yarn changelog",
+    "reset": "git clean -dfx && git reset --hard && yarn"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "dependencies": {
+    "btoa": "^1.1.2",
+    "conf": "^1.1.1",
+    "superagent": "^3.5.2",
+    "tslib": "^1.6.0",
+    "www-authenticate": "^0.6.2"
+  },
+  "devDependencies": {
+    "@types/debug": "^0.0.29",
+    "@types/node": "^7.0.12",
+    "@types/superagent": "^2.0.37",
+    "ava": "^0.19.0",
+    "concurrently": "^3.4.0",
+    "cpx": "^1.5.0",
+    "mkdirp": "^0.5.1",
+    "npm-scripts-info": "^0.3.6",
+    "nyc": "^10.2.0",
+    "opn-cli": "^3.1.0",
+    "sleep-ms": "^2.0.1",
+    "standard-version": "^4.0.0",
+    "trash-cli": "^1.4.0",
+    "tslint": "5.2.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "typedoc": "^0.5.10",
+    "typescript": "^2.2.2"
+  },
+  "keywords": [
+    "library",
+    "node"
+  ],
+  "nyc": {
+    "exclude": [
+      "**/*.spec.js"
+    ]
+  },
+  "ava": {
+    "source": [
+      "test/**/*.js",
+      "build/**/*.js",
+      "!build/**/*.spec.js"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+src
+config
+examples
+test
+tsconfig.json
+tslint.json
+build/temp
+build/docs
+
+coverage
+.nyc_output
+*.log

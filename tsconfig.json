@@ -1,0 +1,44 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"outDir": "build",
+		"rootDir": "src",
+		"moduleResolution": "node",
+		"module": "commonjs",
+		"declaration": true,
+		"importHelpers": true,
+		"inlineSourceMap": true,
+		"pretty": true,
+		"lib": [
+			"dom",
+			"es6"
+		],
+		"types": [
+			"node"
+		],
+		"baseUrl": ".",
+		"paths": {
+			"philipstv-jointspace-client": [
+				"src/index.ts"
+			]
+		},
+		"stripInternal": true,
+		"removeComments": false,
+		"newLine": "LF",
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"strictNullChecks": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"noImplicitAny": false,
+		"noImplicitReturns": false,
+		"noImplicitThis": false
+	},
+	"include": [
+		"src/**/*.ts"
+	],
+	"exclude": [
+		"node_modules/**"
+	],
+	"compileOnSave": false
+}
